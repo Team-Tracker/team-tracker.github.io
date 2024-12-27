@@ -32,29 +32,7 @@ export { HeroDark as Dark };
 */
 export const moreInfo =
   `
-Welcome to Team Tracker – your ultimate solution for seamless team collaboration and efficient project management. Combining the best features of communication tools like Microsoft Teams with the powerful project tracking capabilities of YouTrack, Team Tracker revolutionizes how teams work together and achieve their goals.
-Key Features:
-
-    Real-time Communication: Stay connected with your team through instant messaging, video conferencing, and voice calls. Share ideas, updates, and feedback in real time, ensuring everyone is on the same page.
-
-    Project Management: Organize your tasks, set deadlines, and track progress with our intuitive project management tools. Create and manage projects, assign tasks, and monitor their completion with ease.
-
-    Integrated Workflow: Seamlessly integrate with your existing tools and workflows. Team Tracker supports a wide range of integrations to ensure your team’s productivity remains uninterrupted.
-
-    Customizable Dashboards: Keep track of your team’s performance and project status with customizable dashboards. Visualize key metrics and data to make informed decisions and stay on top of your projects.
-
-    Collaboration Spaces: Create dedicated spaces for different teams, projects, or departments. Share files, documents, and resources within these spaces to foster collaboration and knowledge sharing.
-
-    Task Automation: Automate repetitive tasks and workflows to save time and reduce errors. Set up custom rules and triggers to streamline your processes and enhance efficiency.
-
-    Security and Compliance: Protect your data with robust security features and compliance with industry standards. Ensure that your information is safe and secure at all times.
-
-Why Choose Team Tracker?
-
-Team Tracker is designed to bring out the best in your team by providing a platform that combines communication, collaboration, and project management. Whether you are a small startup or a large enterprise, Team Tracker scales with your needs and helps you achieve your objectives with greater efficiency and transparency.
-
-Join the growing number of organizations that trust Team Tracker to keep their teams connected and their projects on track. Experience the future of teamwork and project management with Team Tracker today!
-`
+  Team-Tracker is a powerful team management tool offering real-time collaboration, task assignments, and progress tracking. With client apps available for Android, Desktop, iOS, and Web, it ensures seamless access and productivity across all devices. Designed to keep teams organized and connected, Team-Tracker streamlines workflows and enhances efficiency for businesses and projects of all sizes.`
 /* Technologies
  ************************************************************** 
   Add or remove technologies in the SAME format below, choose icons here - https://icon-sets.iconify.design/
@@ -62,48 +40,48 @@ Join the growing number of organizations that trust Team Tracker to keep their t
 export const technologieData = [
   {
     id: 1,
-    technology: <Icon icon="mdi:language-html5" className="display-4" />,
-    name: "HTML5",
+    technology: <Icon icon="logos:spring" className="display-4" />,
+    name: "Spring Boot",
   },
   {
     id: 2,
-    technology: <Icon icon="ion:logo-css3" className="display-4" />,
-    name: "CSS3",
+    technology: <Icon icon="logos:mysql" className="display-4" />,
+    name: "MySQL",
   },
   {
     id: 3,
-    technology: <Icon icon="fa6-brands:js" className="display-4" />,
-    name: "JavaScript",
+    technology: <Icon icon="logos:swagger" className="display-4" />,
+    name: "OpenAPI",
   },
   {
     id: 4,
-    technology: <Icon icon="ri:bootstrap-fill" className="display-4" />,
-    name: "BootStrap",
+    technology: <Icon icon="logos:json" className="display-4" />,
+    name: "JSON",
   },
   {
     id: 5,
-    technology: <Icon icon="mdi:react" className="display-4" />,
-    name: "React",
+    technology: <Icon icon="logos:kotlin" className="display-4" />,
+    name: "Kotlin",
   },
   {
     id: 6,
-    technology: <Icon icon="file-icons:styledcomponents" className="display-4" />,
-    name: "Styled Components",
+    technology: <Icon icon="logos:react" className="display-4" />,
+    name: "React",
   },
   {
     id: 7,
-    technology: <Icon icon="akar-icons:redux-fill" className="display-4" />,
-    name: "Redux",
+    technology: <Icon icon="logos:electron" className="display-4" />,
+    name: "Electron",
   },
   {
     id: 8,
-    technology: <Icon icon="bi:git" className="display-4" />,
-    name: "Git",
+    technology: <Icon icon="logos:tailwindcss-icon" className="display-4" />,
+    name: "TailwindCSS",
   },
   {
     id: 9,
-    technology: <Icon icon="fa6-brands:square-github" className="display-4" />,
-    name: "GitHub",
+    technology: <Icon icon="logos:git" className="display-4" />,
+    name: "Git",
   },
 ];
 

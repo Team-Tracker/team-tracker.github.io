@@ -21,6 +21,13 @@ const Projects = () => {
   const projects = useSelector(selectProjects);
   const mainProjects = useSelector(selectMainProjects);
   const { isLoading, isSuccess, isError, error } = useGetProjectsQuery();
+
+  const filteredMainProjects = mainProjects.filter(
+    (project) =>
+      !project.name.includes(".github") &&
+      !project.html_url.includes("team-tracker.github.io")
+  );
+
   let content;
 
   if (isLoading) {
@@ -37,10 +44,10 @@ const Projects = () => {
             Oops, you do not have any GitHub projects yet...
           </h2>
         )}
-        {mainProjects.length !== 0 && (
+        {filteredMainProjects.length !== 0 && (
           <>
             <Row xs={1} md={2} lg={3} className="g-4 justify-content-center">
-              {mainProjects.map((element) => {
+              {filteredMainProjects.map((element) => {
                 return (
                   <Col key={element.id}>
                     <ProjectCard

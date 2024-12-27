@@ -33,7 +33,7 @@ const About = ({ avatar_url, bio, moreInfo }) => {
       <StyledAbout className="section">
         <Container>
           <Container className="d-flex justify-content-center">
-            <Title size={"h2"} text={"About Me"} />
+            <Title size={"h2"} text={"About"} />
           </Container>
           <Row className="align-items-center mt-5">
             <Col className="d-flex flex-column text-center">
