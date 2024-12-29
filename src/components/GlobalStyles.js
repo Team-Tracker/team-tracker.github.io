@@ -28,7 +28,7 @@ section {
 }
 
 .section {
-  min-height: 100vh;
+  min-height: 75vh;
   display: grid;
   place-items: center;
   padding: var(--nav-height) 0;
