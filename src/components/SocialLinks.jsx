@@ -33,7 +33,7 @@ const SocialLinks = () => {
     <StyledSocialLinks>
       <a
         href={userData.html_url}
-        aria-label="Check out my GitHub profile."
+        aria-label="Check out the GitHub organization."
         className="link-icons"
       >
         <Icon icon="icomoon-free:github" />

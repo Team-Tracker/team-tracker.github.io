@@ -116,7 +116,7 @@ const Hero = ({ name }) => {
           <Col className="d-none d-md-block">
             <img
               src={Logo}
-              alt="React Logo"
+              alt="Logo"
               className="w-75 mx-auto hero-img"
             />
           </Col>
