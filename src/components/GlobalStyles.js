@@ -1,6 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+
 /*
 =============== 
 CSS Custom Properties
@@ -15,8 +17,8 @@ CSS Custom Properties
   --card-height: 29rem;
   
   /* Typography */
-  --font-family-primary: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  --font-family-display: 'Permanent Marker', cursive;
+  --font-family-primary: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  --font-family-display: 'Space Grotesk', 'Manrope', sans-serif;
   
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -29,7 +31,14 @@ CSS Custom Properties
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   --shadow-md: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
   --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.10);
-  
+
+  /* Surfaces */
+  --surface: #0f172a;
+  --surface-contrast: #0b1022;
+  --surface-glass: rgba(255, 255, 255, 0.06);
+  --text-muted: rgba(255, 255, 255, 0.75);
+  --grid-line: rgba(255, 255, 255, 0.08);
+
   /* Z-index layers */
   --z-dropdown: 1000;
   --z-sticky: 1020;
@@ -58,10 +67,14 @@ html {
 
 body {
   font-family: var(--font-family-primary);
-  line-height: 1.6;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeSpeed;
+  background: radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.15), transparent 32%),
+              radial-gradient(circle at 80% 0%, rgba(16, 185, 129, 0.18), transparent 28%),
+              linear-gradient(160deg, #0b1020 0%, #0f172a 55%, #0b1120 100%);
+  color: #e6ecff;
 }
 
 /*
@@ -78,10 +91,31 @@ section {
 }
 
 .section {
-  min-height: 75vh;
-  display: grid;
-  place-items: center;
-  padding: var(--nav-height) 0;
+  min-height: 70vh;
+  padding: calc(var(--nav-height) + 2rem) 0;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 4%;
+  border-radius: 32px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(16, 185, 129, 0.05));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  z-index: -2;
+}
+
+.section::after {
+  content: "";
+  position: absolute;
+  inset: 6%;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: 0 30px 120px rgba(0, 0, 0, 0.45);
+  z-index: -1;
 }
 
 /*
@@ -90,18 +124,24 @@ Typography
 ===============
 */
 .title {
-  font-family: var(--font-family-primary);
-  font-weight: 600;
-  letter-spacing: -0.025em;
+  font-family: 'Space Grotesk', var(--font-family-primary);
+  font-weight: 700;
+  letter-spacing: -0.03em;
 }
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
   margin-bottom: var(--spacing-sm);
+  font-family: 'Space Grotesk', var(--font-family-primary);
 }
 
 p {
   margin-bottom: var(--spacing-md);
+  color: var(--text-muted);
+}
+
+small {
+  color: var(--text-muted);
 }
 
 /*
@@ -129,6 +169,38 @@ select:focus {
   outline-offset: 2px;
 }
 
+.btn {
+  transition: var(--transition);
+  font-weight: 600;
+  border-radius: 0.75rem;
+  letter-spacing: 0.01em;
+  padding-inline: 1.5rem;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(120deg, #2563eb 0%, #10b981 120%);
+  border: none;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.35);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+
+.btn-outline-light,
+.btn-outline-dark {
+  border-width: 1.5px;
+}
+
 /*
 =============== 
 Icon Links
@@ -144,14 +216,16 @@ Icon Links
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   padding: var(--spacing-xs);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 
   &:hover,
   &:focus {
     color: ${({ theme }) =>
     theme.name === "light" ? "var(--bs-light)" : "var(--bs-dark)"};
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.02);
     box-shadow: var(--shadow-md);
   }
 
@@ -171,28 +245,18 @@ Bootstrap Overrides
   box-shadow: var(--shadow-sm);
 }
 
-.btn {
-  transition: var(--transition);
-  font-weight: 500;
-  border-radius: 0.5rem;
-  
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
-  }
-  
-  &:active {
-    transform: translateY(0);
-  }
-}
-
 .card {
-  border-radius: 1rem;
+  border-radius: 1.25rem;
   overflow: hidden;
   transition: var(--transition);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  color: #e5e7eb;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
   
   &:hover {
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 30px 120px rgba(0, 0, 0, 0.45);
   }
 }
 
@@ -227,6 +291,39 @@ Utilities
   &:focus {
     top: 0;
   }
+}
+
+.glass-panel {
+  background: var(--surface-glass);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(14px);
+  border-radius: 24px;
+  padding: 2rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e5e7eb;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 120px 120px;
+  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 65%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 /*

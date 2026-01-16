@@ -20,24 +20,26 @@ const Technologies = () => {
           <Container className="d-flex justify-content-center">
             <Title size={"h2"} text={"Technologies"} />
           </Container>
-          <Row className="mt-3 align-items-center">
-            {technologieData.map((technologies) => {
-              return (
-                <Col xs={4} key={technologies.id} className="my-md-5">
-                  <figure>
-                    {technologies.technology}
-                    <figcaption>{technologies.name}</figcaption>
-                  </figure>
-                </Col>
-              );
-            })}
-          </Row>
+          <div className="glass-panel mt-4">
+            <Row className="g-4 align-items-center">
+              {technologieData.map((technologies) => {
+                return (
+                  <Col xs={6} md={4} lg={3} key={technologies.id}>
+                    <figure className="m-0 d-flex flex-column align-items-center gap-2">
+                      <div className="chip">{technologies.technology}</div>
+                      <figcaption className="fw-semibold">{technologies.name}</figcaption>
+                    </figure>
+                  </Col>
+                );
+              })}
+            </Row>
+          </div>
           {resume && (
             <a href={resume}>
               <Button
                 size="lg"
                 variant={theme === "light" ? "outline-dark" : "outline-light"}
-                className="mt-5"
+                className="mt-4"
               >
                 R&eacute;sum&eacute;
               </Button>

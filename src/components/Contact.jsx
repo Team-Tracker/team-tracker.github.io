@@ -21,8 +21,10 @@ const Contact = () => {
         <Container className="d-flex justify-content-center">
           <Title size={"h2"} text={"Contact"} />
         </Container>
-        <Container>
-          <ContactForm />
+        <Container className="mt-4">
+          <div className="glass-panel">
+            <ContactForm />
+          </div>
         </Container>
       </StyledSection>
     </Element>

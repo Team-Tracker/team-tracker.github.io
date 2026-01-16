@@ -5,90 +5,89 @@ import styled, { keyframes } from "styled-components";
 import PropTypes from "prop-types";
 // Icons
 import { Icon } from "@iconify/react";
-// Images
-import Logo from "../images/logo.svg";
-import { Light, Dark } from "../config";
 // Components
 import { useErrorBoundary } from "react-error-boundary";
-import { Link } from "react-scroll";
+import { Link as ScrollLink } from "react-scroll";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import SocialLinks from "./SocialLinks";
 
 // #region styled-components
-const spin = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+const float = keyframes`
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
 `;
 
 const StyledHero = styled.header`
   position: relative;
-  display: grid;
-  place-items: center;
-  max-width: 1920px;
-  margin: 0 auto;
-  min-height: calc(100vh - var(--nav-height));
+  overflow: hidden;
+  padding: calc(var(--nav-height) + 2rem) 0 3rem;
+  background: radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.3), transparent 30%),
+    radial-gradient(circle at 90% 10%, rgba(16, 185, 129, 0.35), transparent 28%),
+    linear-gradient(160deg, #0b1020 0%, #0f172a 60%, #0b1120 100%);
+  color: #e5e7eb;
 
-  &::before {
-    content: "";
+  .grid-lines {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
+    background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 120px 120px;
+    opacity: 0.35;
+    mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 70%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .floating-orb {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.28) 0%, rgba(37, 99, 235, 0) 65%);
+    filter: blur(30px);
+    z-index: 0;
+  }
+
+  .orb-left {
+    top: 10%;
+    left: -6%;
+  }
+
+  .orb-right {
+    bottom: -10%;
+    right: -4%;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.28) 0%, rgba(16, 185, 129, 0) 65%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+`;
+
+const MediaCard = styled.div`
+  position: relative;
+  overflow: hidden;
+  animation: ${float} 14s ease-in-out infinite;
+  box-shadow: 0 20px 90px rgba(0, 0, 0, 0.45);
+  border-radius: 24px;
+`;
+
+const VideoFrame = styled.div`
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  iframe {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
-    background: ${({ theme }) =>
-      theme.name === "light"
-        ? "linear-gradient(135deg, var(--bs-primary), var(--bs-light))"
-        : "linear-gradient(135deg, var(--bs-primary), var(--bs-dark))"};
-    z-index: -2;
-  }
-
-  /* Overlay for contrast */
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: ${({ theme }) =>
-      theme.name === "light"
-        ? "rgba(255, 255, 255, 0.2)"
-        : "rgba(0, 0, 0, 0.2)"};
-    z-index: -1;
-  }
-
-  .down-container {
-    height: 10rem;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .hero-img {
-      animation: ${spin} infinite 20s linear;
-    }
-  }
-
-  @media screen and (min-width: 1180px) {
-    &::before {
-      background: ${({ theme }) =>
-        theme.name === "light"
-          ? `url(${Light}) top center fixed no-repeat`
-          : `url(${Dark}) top center fixed no-repeat`};
-      background-size: 100vw auto;
-    }
-  }
-
-  @media screen and (min-width: 1367px) {
-    &::before {
-      background: ${({ theme }) =>
-        theme.name === "light"
-          ? `url(${Light}) center center fixed no-repeat`
-          : `url(${Dark}) center center fixed no-repeat`};
-      background-size: cover;
-    }
+    border: 0;
   }
 `;
 // #endregion
@@ -103,31 +102,72 @@ const Hero = ({ name }) => {
 
   return (
     <StyledHero>
-      <Container>
-        <Row className="align-items-center text-center">
-          <Col>
-            <h1 className="mb-3 display-3 title">
+      <span className="grid-lines" aria-hidden="true" />
+      <span className="floating-orb orb-left" aria-hidden="true" />
+      <span className="floating-orb orb-right" aria-hidden="true" />
+
+      <Container className="hero-content">
+        <Row className="align-items-center gy-5">
+          <Col lg={6} className="text-center text-lg-start">
+            <div className="chip mb-3">
+              <Icon icon="mdi:flash" /> Jetzt live &amp; verfügbar
+            </div>
+            <h1 className="display-4 fw-bold title mb-3">
               {name === null ? "null" : name}
             </h1>
-            <div className="d-flex align-items-center justify-content-center">
+            <p className="lead mb-4">
+              Ich kombiniere Produktdenken mit klarem UI, schnellen Prototypen und
+              zuverlässiger Full-Stack-Umsetzung. Lass uns gemeinsam moderne Experiences bauen.
+            </p>
+            <div className="d-flex flex-column flex-sm-row gap-3 gap-sm-4 mb-4 justify-content-center justify-content-lg-start">
+              <ScrollLink to={"Projects"} smooth offset={-60} className="d-inline-block">
+                <Button size="lg" variant="primary">Projekte ansehen</Button>
+              </ScrollLink>
+              <ScrollLink to={"Contact"} smooth offset={-60} className="d-inline-block">
+                <Button size="lg" variant="outline-light">Kontakt aufnehmen</Button>
+              </ScrollLink>
+            </div>
+            <div className="d-flex align-items-center justify-content-center justify-content-lg-start">
               <SocialLinks />
             </div>
           </Col>
-          <Col className="d-none d-md-block">
-            <img
-              src={Logo}
-              alt="Logo"
-              className="w-75 mx-auto hero-img"
-            />
+
+          <Col lg={6}>
+            <MediaCard className="glass-panel">
+              <div className="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-3">
+                <div className="chip">
+                  <Icon icon="mdi:play" /> Featured Video
+                </div>
+                <small className="text-uppercase fw-semibold">Showreel · 2026</small>
+              </div>
+              <VideoFrame>
+                <iframe
+                  title="Featured video"
+                  src="https://www.youtube.com/embed/O0ty3WvZ60c"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                />
+              </VideoFrame>
+              <div
+                className="d-flex align-items-center gap-2 mt-3"
+                style={{ color: "var(--text-muted)" }}
+              >
+                <Icon icon="mdi:arrow-down" />
+                <span>Scroll weiter für Projekte &amp; Tech-Stack</span>
+              </div>
+            </MediaCard>
           </Col>
         </Row>
-        <Row className="align-items-end down-container">
-          <Col className="m-4 text-center">
-            <Link to={"About"} className="link-icons">
+
+        <Row className="align-items-end mt-4">
+          <Col className="text-center">
+            <ScrollLink to={"About"} className="link-icons" smooth offset={-60}>
               <Icon icon="fa6-solid:circle-chevron-down" />
-            </Link>
+            </ScrollLink>
           </Col>
         </Row>
+
         <Button
           className="d-none"
           onClick={() =>

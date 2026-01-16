@@ -94,7 +94,9 @@ const Projects = () => {
           <Container className="d-flex justify-content-center">
             <Title size={"h2"} text={"Projects"} />
           </Container>
-          {content}
+          <div className="glass-panel mt-4">
+            {content}
+          </div>
         </Container>
       </section>
     </Element>
