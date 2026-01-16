@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg width="800px" height="800px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><defs><style>.a{fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;}</style></defs><path class="a" d="M16.9787,43.5,33.8528,21.9778H23.805l4.4819-9.2436H37.835L41.944,4.5H10.165L6.056,12.7342H19.0386c-2.4845,5.0038-4.977,10.0035-7.5547,14.9679l9.8884-.0666L16.9787,43.5"/></svg>
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<linearGradient id="tt-grad" x1="12" y1="10" x2="52" y2="54" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#2563EB" />
+			<stop offset="1" stop-color="#10B981" />
+		</linearGradient>
+	</defs>
+	<circle cx="32" cy="32" r="28" fill="#0B1220" />
+	<circle cx="32" cy="32" r="26" fill="#0F172A" stroke="url(#tt-grad)" stroke-width="2" />
+	<path d="M19 22H45V27.2H36.2V42H30.8V27.2H19V22Z" fill="#F8FBFF" />
+	<path d="M26.5 30.8H32V42H26.5V30.8Z" fill="url(#tt-grad)" />
+</svg>

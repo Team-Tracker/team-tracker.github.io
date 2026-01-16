@@ -55,7 +55,7 @@ const About = ({ avatar_url, bio, moreInfo }) => {
             </Col>
             <Col lg={7}>
               <div className="glass-panel about-card">
-                <div className="chip mb-3">Kurzer Überblick</div>
+                <div className="chip mb-3">Quick snapshot</div>
                 {bio && <p className="mb-3">{bio}</p>}
                 {moreInfo && <p className="mb-0">{moreInfo}</p>}
               </div>

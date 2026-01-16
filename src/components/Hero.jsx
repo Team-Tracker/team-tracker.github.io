@@ -3,10 +3,11 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 // State
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import { selectMode } from "../app/appSlice";
 // Icons
 import { Icon } from "@iconify/react";
 // Components
-import { useErrorBoundary } from "react-error-boundary";
 import { Link as ScrollLink } from "react-scroll";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import SocialLinks from "./SocialLinks";
@@ -22,10 +23,11 @@ const StyledHero = styled.header`
   position: relative;
   overflow: hidden;
   padding: calc(var(--nav-height) + 2rem) 0 3rem;
-  background: radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.3), transparent 30%),
-    radial-gradient(circle at 90% 10%, rgba(16, 185, 129, 0.35), transparent 28%),
-    linear-gradient(160deg, #0b1020 0%, #0f172a 60%, #0b1120 100%);
-  color: #e5e7eb;
+  background: ${({ theme }) =>
+    theme.name === "light"
+      ? "radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.18), transparent 30%), radial-gradient(circle at 90% 10%, rgba(16, 185, 129, 0.18), transparent 28%), linear-gradient(150deg, #f5f7ff 0%, #e9f1ff 55%, #e5eeff 100%)"
+      : "radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.3), transparent 30%), radial-gradient(circle at 90% 10%, rgba(16, 185, 129, 0.35), transparent 28%), linear-gradient(160deg, #0b1020 0%, #0f172a 60%, #0b1120 100%)"};
+  color: ${({ theme }) => (theme.name === "light" ? "#0b1220" : "#e5e7eb")};
 
   .grid-lines {
     position: absolute;
@@ -98,7 +100,8 @@ const propTypes = {
 };
 
 const Hero = ({ name }) => {
-  const { showBoundary } = useErrorBoundary();
+  const theme = useSelector(selectMode);
+  const secondaryVariant = theme === "light" ? "outline-dark" : "outline-light";
 
   return (
     <StyledHero>
@@ -110,21 +113,21 @@ const Hero = ({ name }) => {
         <Row className="align-items-center gy-5">
           <Col lg={6} className="text-center text-lg-start">
             <div className="chip mb-3">
-              <Icon icon="mdi:flash" /> Jetzt live &amp; verfügbar
+              <Icon icon="mdi:flash" /> Team status at a glance
             </div>
             <h1 className="display-4 fw-bold title mb-3">
               {name === null ? "null" : name}
             </h1>
             <p className="lead mb-4">
-              Ich kombiniere Produktdenken mit klarem UI, schnellen Prototypen und
-              zuverlässiger Full-Stack-Umsetzung. Lass uns gemeinsam moderne Experiences bauen.
+              One hub for live status, assignments, and alerts across web, desktop, and mobile. Keep everyone aligned,
+              respond faster, and ship with confidence.
             </p>
             <div className="d-flex flex-column flex-sm-row gap-3 gap-sm-4 mb-4 justify-content-center justify-content-lg-start">
               <ScrollLink to={"Projects"} smooth offset={-60} className="d-inline-block">
-                <Button size="lg" variant="primary">Projekte ansehen</Button>
+                <Button size="lg" variant="primary">View projects</Button>
               </ScrollLink>
               <ScrollLink to={"Contact"} smooth offset={-60} className="d-inline-block">
-                <Button size="lg" variant="outline-light">Kontakt aufnehmen</Button>
+                <Button size="lg" variant={secondaryVariant}>Get in touch</Button>
               </ScrollLink>
             </div>
             <div className="d-flex align-items-center justify-content-center justify-content-lg-start">
@@ -154,7 +157,7 @@ const Hero = ({ name }) => {
                 style={{ color: "var(--text-muted)" }}
               >
                 <Icon icon="mdi:arrow-down" />
-                <span>Scroll weiter für Projekte &amp; Tech-Stack</span>
+                <span>Keep scrolling for projects &amp; tech stack</span>
               </div>
             </MediaCard>
           </Col>
@@ -167,18 +170,6 @@ const Hero = ({ name }) => {
             </ScrollLink>
           </Col>
         </Row>
-
-        <Button
-          className="d-none"
-          onClick={() =>
-            showBoundary({
-              name: "Error",
-              message: "Simulated error message",
-            })
-          }
-        >
-          Simulate Error Boundary
-        </Button>
       </Container>
     </StyledHero>
   );

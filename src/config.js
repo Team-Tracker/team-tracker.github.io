@@ -95,7 +95,7 @@ export const technologieData = [
   },
   {
     id: 12,
-    technology: <Icon icon="logos:latex" className="display-4" />,
+    technology: <Icon icon="simple-icons:latex" className="display-4" />,
     name: "LaTeX",
   },
 ];

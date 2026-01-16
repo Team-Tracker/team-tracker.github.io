@@ -14,14 +14,12 @@ import { Card } from "react-bootstrap";
 const StyledCard = styled.div`
   .card {
     height: var(--card-height);
-    border: var(--border);
-    transition: all 0.2s ease-in-out;
-    background: ${({ theme }) =>
-      theme.name === "light" ? "" : "var(--bs-gray)"};
-    box-shadow: ${({ theme }) =>
-      theme.name === "light"
-        ? "0 3px 10px rgb(0 0 0 / 0.2)"
-        : "0 3px 10px rgb(255 255 255 / 0.2)"};
+    border: 1px solid var(--card-border);
+    transition: var(--transition);
+    background: var(--surface-glass);
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(12px);
+    color: inherit;
 
     .card-img-top {
       height: 50%;
@@ -31,30 +29,29 @@ const StyledCard = styled.div`
     .card-link {
       text-decoration: none;
       font-size: 1.5rem;
+      color: inherit;
 
       &:hover {
-        color: ${({ theme }) =>
-          theme.name === "light" ? "var(--bs-dark)" : "var(--bs-light)"};
+        color: var(--bs-primary);
       }
     }
 
     .card-footer {
-      border-top: var(--border);
-      background: ${({ theme }) =>
-        theme.name === "light" ? "" : "var(--bs-gray-dark)"};
+      border-top: 1px solid var(--card-border);
+      background: transparent;
+      backdrop-filter: blur(8px);
 
       .card-link {
-        color: ${({ theme }) =>
-          theme.name === "light" ? "var(--bs-dark)" : "var(--bs-light)"};
-
-        &:hover {
-          color: var(--bs-primary);
-        }
+        color: inherit;
       }
     }
 
     &:hover {
-      transform: scale(1.03);
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: ${({ theme }) =>
+        theme.name === "light"
+          ? "0 18px 70px rgba(15, 23, 42, 0.2)"
+          : "0 30px 120px rgba(0, 0, 0, 0.45)"};
     }
   }
 `;

@@ -32,13 +32,6 @@ CSS Custom Properties
   --shadow-md: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
   --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.10);
 
-  /* Surfaces */
-  --surface: #0f172a;
-  --surface-contrast: #0b1022;
-  --surface-glass: rgba(255, 255, 255, 0.06);
-  --text-muted: rgba(255, 255, 255, 0.75);
-  --grid-line: rgba(255, 255, 255, 0.08);
-
   /* Z-index layers */
   --z-dropdown: 1000;
   --z-sticky: 1020;
@@ -71,10 +64,32 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeSpeed;
-  background: radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.15), transparent 32%),
-              radial-gradient(circle at 80% 0%, rgba(16, 185, 129, 0.18), transparent 28%),
-              linear-gradient(160deg, #0b1020 0%, #0f172a 55%, #0b1120 100%);
-  color: #e6ecff;
+  color: ${({ theme }) => (theme.name === "light" ? "#0b1220" : "#e6ecff")};
+  background: ${({ theme }) =>
+    theme.name === "light"
+      ? "radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.10), transparent 32%), radial-gradient(circle at 80% 0%, rgba(16, 185, 129, 0.10), transparent 28%), linear-gradient(155deg, #f7f9ff 0%, #eef2ff 45%, #e8f0ff 100%)"
+      : "radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.15), transparent 32%), radial-gradient(circle at 80% 0%, rgba(16, 185, 129, 0.18), transparent 28%), linear-gradient(160deg, #0b1020 0%, #0f172a 55%, #0b1120 100%)"};
+
+  /* theme-driven surface tokens */
+  --surface: ${({ theme }) => (theme.name === "light" ? "#ffffff" : "#0f172a")};
+  --surface-contrast: ${({ theme }) => (theme.name === "light" ? "#f3f6ff" : "#0b1022")};
+  --surface-glass: ${({ theme }) =>
+    theme.name === "light" ? "rgba(255, 255, 255, 0.82)" : "rgba(255, 255, 255, 0.06)"};
+  --text-muted: ${({ theme }) =>
+    theme.name === "light" ? "rgba(15, 23, 42, 0.72)" : "rgba(255, 255, 255, 0.75)"};
+  --grid-line: ${({ theme }) =>
+    theme.name === "light" ? "rgba(15, 23, 42, 0.08)" : "rgba(255, 255, 255, 0.08)"};
+  --chip-bg: ${({ theme }) =>
+    theme.name === "light" ? "rgba(37, 99, 235, 0.12)" : "rgba(255, 255, 255, 0.08)"};
+  --chip-border: ${({ theme }) =>
+    theme.name === "light" ? "rgba(37, 99, 235, 0.25)" : "rgba(255, 255, 255, 0.12)"};
+  --chip-fg: ${({ theme }) => (theme.name === "light" ? "#0b1220" : "#e5e7eb")};
+  --card-border: ${({ theme }) =>
+    theme.name === "light" ? "rgba(15, 23, 42, 0.08)" : "rgba(255, 255, 255, 0.08)"};
+  --card-shadow: ${({ theme }) =>
+    theme.name === "light"
+      ? "0 14px 45px rgba(15, 23, 42, 0.16)"
+      : "0 20px 80px rgba(0, 0, 0, 0.35)"};
 }
 
 /*
@@ -249,14 +264,17 @@ Bootstrap Overrides
   border-radius: 1.25rem;
   overflow: hidden;
   transition: var(--transition);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--surface-glass);
+  border: 1px solid var(--card-border);
   backdrop-filter: blur(12px);
-  color: #e5e7eb;
-  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
+  color: inherit;
+  box-shadow: var(--card-shadow);
   
   &:hover {
-    box-shadow: 0 30px 120px rgba(0, 0, 0, 0.45);
+    box-shadow: ${({ theme }) =>
+      theme.name === "light"
+        ? "0 18px 70px rgba(15, 23, 42, 0.2)"
+        : "0 30px 120px rgba(0, 0, 0, 0.45)"};
   }
 }
 
@@ -295,8 +313,8 @@ Utilities
 
 .glass-panel {
   background: var(--surface-glass);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
   backdrop-filter: blur(14px);
   border-radius: 24px;
   padding: 2rem;
@@ -308,11 +326,11 @@ Utilities
   gap: 0.35rem;
   padding: 0.5rem 0.95rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  color: #e5e7eb;
+  background: var(--chip-bg);
+  color: var(--chip-fg);
   font-weight: 600;
   letter-spacing: 0.02em;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--chip-border);
 }
 
 .grid-overlay {

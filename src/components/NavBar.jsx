@@ -40,8 +40,10 @@ const StyledDiv = styled.div`
   }
 
   .logo-img {
-    background: ${({ theme }) =>
-      theme.name === "light" ? "var(--bs-dark)" : "var(--bs-light)"};
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
   }
 `;
 // #endregion
