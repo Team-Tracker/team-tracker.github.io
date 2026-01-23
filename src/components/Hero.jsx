@@ -15,7 +15,7 @@ import SocialLinks from "./SocialLinks";
 // #region styled-components
 const float = keyframes`
   0% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+  50% { transform: translateY(-8px); }
   100% { transform: translateY(0px); }
 `;
 
@@ -70,7 +70,7 @@ const StyledHero = styled.header`
 const MediaCard = styled.div`
   position: relative;
   overflow: hidden;
-  animation: ${float} 14s ease-in-out infinite;
+  animation: ${float} 6s ease-in-out infinite;
   box-shadow: 0 20px 90px rgba(0, 0, 0, 0.45);
   border-radius: 24px;
 `;

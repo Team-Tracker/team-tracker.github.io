@@ -16,7 +16,7 @@ const Loading = styled.div`
   border-radius: 50%;
   border-top-color: var(--bs-primary);
   margin: 1rem auto;
-  animation: ${spin} 0.6s linear infinite;
+  animation: ${spin} 1s ease-in-out infinite;
 `;
 // #endregion
 

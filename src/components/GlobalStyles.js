@@ -11,7 +11,7 @@ CSS Custom Properties
 :root {
   /* Layout */
   --border: 1px solid var(--bs-primary);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: all 0.25s ease-in-out;
   --nav-height: 55px;
   --min-footer-height: 11vh;
   --card-height: 29rem;
@@ -192,7 +192,7 @@ select:focus {
   padding-inline: 1.5rem;
   
   &:hover {
-    transform: translateY(-1px);
+    transform: translateY(-1.5px);
     box-shadow: var(--shadow-md);
   }
   
