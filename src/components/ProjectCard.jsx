@@ -47,7 +47,7 @@ const StyledCard = styled.div`
     }
 
     &:hover {
-      transform: translateY(-4px) scale(1.01);
+      transform: translateY(-2px);
       box-shadow: ${({ theme }) =>
         theme.name === "light"
           ? "0 18px 70px rgba(15, 23, 42, 0.2)"

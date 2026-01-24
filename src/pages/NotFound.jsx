@@ -39,7 +39,7 @@ const StyledNotFound = styled.main`
 
   @media (prefers-reduced-motion: no-preference) {
     img {
-      animation: ${Spin} infinite 20s linear;
+      animation: ${Spin} infinite 8s ease-in-out;
     }
   }
 `;
