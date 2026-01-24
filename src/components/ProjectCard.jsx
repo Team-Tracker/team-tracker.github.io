@@ -54,6 +54,23 @@ const StyledCard = styled.div`
           : "0 30px 120px rgba(0, 0, 0, 0.45)"};
     }
   }
+
+  @media (max-width: 575.98px) {
+    .card {
+      height: auto;
+      min-height: 22rem;
+    }
+
+    .card .card-img-top {
+      height: 12rem;
+      padding: 0.75rem;
+      object-fit: contain;
+    }
+
+    .card .card-link {
+      font-size: 1.15rem;
+    }
+  }
 `;
 // #endregion
 

@@ -15,6 +15,13 @@ CSS Custom Properties
   --nav-height: 55px;
   --min-footer-height: 11vh;
   --card-height: 29rem;
+
+  /* Responsive layout tokens */
+  --page-padding-x: 1rem;
+  --section-radius: 32px;
+  --section-inset: 4%;
+  --section-inset-inner: 6%;
+  --glass-padding: 2rem;
   
   /* Typography */
   --font-family-primary: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
@@ -58,6 +65,11 @@ html {
   text-size-adjust: 100%;
 }
 
+body,
+#root {
+  min-height: 100dvh;
+}
+
 body {
   font-family: var(--font-family-primary);
   line-height: 1.7;
@@ -92,6 +104,34 @@ body {
       : "0 20px 80px rgba(0, 0, 0, 0.35)"};
 }
 
+/* Prevent horizontal scroll on small screens due to glows/insets */
+body {
+  overflow-x: hidden;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Fluid typography baseline */
+h1 {
+  font-size: clamp(2rem, 3.6vw + 1rem, 3.5rem);
+}
+
+h2 {
+  font-size: clamp(1.6rem, 2.2vw + 1rem, 2.5rem);
+}
+
+p.lead {
+  font-size: clamp(1rem, 0.6vw + 0.95rem, 1.25rem);
+}
+
 /*
 =============== 
 Layout Components
@@ -116,9 +156,10 @@ section {
 .section::before {
   content: "";
   position: absolute;
-  inset: 4%;
-  border-radius: 32px;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(16, 185, 129, 0.05));
+  inset: var(--section-inset);
+  border-radius: var(--section-radius);
+  /* No colored gradients in section background */
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.06);
   z-index: -2;
 }
@@ -126,8 +167,8 @@ section {
 .section::after {
   content: "";
   position: absolute;
-  inset: 6%;
-  border-radius: 28px;
+  inset: var(--section-inset-inner);
+  border-radius: calc(var(--section-radius) - 4px);
   background: rgba(255, 255, 255, 0.02);
   box-shadow: 0 30px 120px rgba(0, 0, 0, 0.45);
   z-index: -1;
@@ -176,12 +217,31 @@ a:focus {
   outline-offset: 2px;
 }
 
+/*
+  Focus handling:
+  - Avoid the "white border" flash on mouse click/hover (focus)
+  - Keep an explicit focus ring for keyboard users via :focus-visible
+*/
 button:focus,
 input:focus,
 textarea:focus,
-select:focus {
+select:focus,
+.btn:focus,
+.btn:active:focus,
+.btn-check:focus + .btn,
+.btn-check:checked + .btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+a:focus-visible,
+.btn:focus-visible {
   outline: 2px solid var(--bs-primary);
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
 .btn {
@@ -199,6 +259,30 @@ select:focus {
   &:active {
     transform: translateY(0);
   }
+}
+
+/* Cleaner hover/active: no border-color flash / no bootstrap focus ring leak */
+.btn:hover,
+.btn:active,
+.btn.active,
+.show > .btn.dropdown-toggle {
+  outline: none;
+}
+
+/* Outline buttons can look like they get a "white border" when combined with shadows.
+   Keep hover crisp by avoiding heavy shadows on outline variants. */
+.btn-outline-light:hover,
+.btn-outline-dark:hover,
+.btn-outline-light:active,
+.btn-outline-dark:active {
+  box-shadow: none;
+}
+
+/* Ensure bootstrap doesn't add an extra ring/glow for active states */
+.btn:active,
+.btn.active,
+.btn-check:checked + .btn {
+  box-shadow: none;
 }
 
 .btn-primary {
@@ -317,7 +401,7 @@ Utilities
   box-shadow: var(--card-shadow);
   backdrop-filter: blur(14px);
   border-radius: 24px;
-  padding: 2rem;
+  padding: var(--glass-padding);
 }
 
 .chip {
@@ -339,7 +423,6 @@ Utilities
   background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 120px 120px;
-  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 65%);
   pointer-events: none;
   z-index: -1;
 }
@@ -388,6 +471,39 @@ Responsive Design
   
   .form-group {
     max-width: 750px;
+  }
+}
+
+@media screen and (max-width: 575.98px) {
+  :root {
+    --page-padding-x: 0.875rem;
+    --section-radius: 22px;
+    --section-inset: 3.25%;
+    --section-inset-inner: 4.5%;
+    --glass-padding: 1.25rem;
+  }
+
+  .section {
+    padding: calc(var(--nav-height) + 1.25rem) 0;
+    min-height: auto;
+  }
+
+  .link-icons {
+    font-size: 2.25rem;
+    margin: 0 var(--spacing-md);
+  }
+
+  .btn {
+    padding-inline: 1.1rem;
+  }
+
+  /* Consistent full-width buttons in stacked (mobile) CTA groups */
+  .d-flex.flex-column > .btn,
+  .d-flex.flex-column > a,
+  .d-flex.flex-column > a > .btn,
+  .d-flex.flex-column > .d-inline-block,
+  .d-flex.flex-column > .d-inline-block > .btn {
+    width: 100%;
   }
 }
 

@@ -45,6 +45,40 @@ const StyledDiv = styled.div`
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
   }
+
+  /* Mobile-first nav ergonomics */
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .navbar-toggler {
+    border-radius: 0.9rem;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 0.75rem 0.25rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+  }
+
+  /* Improve tap target & separation in collapsed menu */
+  @media (max-width: 1199.98px) {
+    .navbar-collapse {
+      margin-top: 0.75rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      max-height: calc(100dvh - var(--nav-height) - 1rem);
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .navbar-nav .nav-item + .nav-item {
+      margin-top: 0.25rem;
+    }
+  }
 `;
 // #endregion
 
