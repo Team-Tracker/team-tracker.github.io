@@ -18,7 +18,7 @@ const StyledCard = styled.div`
     transition: var(--transition);
     background: var(--surface-glass);
     box-shadow: var(--card-shadow);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(4px);
     color: inherit;
 
     .card-img-top {
@@ -30,16 +30,18 @@ const StyledCard = styled.div`
       text-decoration: none;
       font-size: 1.5rem;
       color: inherit;
+      transition: var(--transition);
 
       &:hover {
         color: var(--bs-primary);
+        opacity: 0.85;
       }
     }
 
     .card-footer {
       border-top: 1px solid var(--card-border);
       background: transparent;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(2px);
 
       .card-link {
         color: inherit;
@@ -47,11 +49,11 @@ const StyledCard = styled.div`
     }
 
     &:hover {
-      transform: translateY(-2px);
+      transform: translateY(-1px);
       box-shadow: ${({ theme }) =>
         theme.name === "light"
-          ? "0 18px 70px rgba(15, 23, 42, 0.2)"
-          : "0 30px 120px rgba(0, 0, 0, 0.45)"};
+          ? "0 4px 12px rgba(15, 23, 42, 0.12)"
+          : "0 6px 16px rgba(0, 0, 0, 0.30)"};
     }
   }
 `;

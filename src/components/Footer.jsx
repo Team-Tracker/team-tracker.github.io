@@ -32,6 +32,7 @@ const StyledFooter = styled.footer`
           return "var(--bs-gray-dark)";
         }
       }};
+      opacity: 0.85;
     }
   }
 `;

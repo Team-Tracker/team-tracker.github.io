@@ -25,8 +25,8 @@ const StyledHero = styled.header`
   padding: calc(var(--nav-height) + 2rem) 0 3rem;
   background: ${({ theme }) =>
     theme.name === "light"
-      ? "radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.18), transparent 30%), radial-gradient(circle at 90% 10%, rgba(16, 185, 129, 0.18), transparent 28%), linear-gradient(150deg, #f5f7ff 0%, #e9f1ff 55%, #e5eeff 100%)"
-      : "radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.3), transparent 30%), radial-gradient(circle at 90% 10%, rgba(16, 185, 129, 0.35), transparent 28%), linear-gradient(160deg, #0b1020 0%, #0f172a 60%, #0b1120 100%)"};
+      ? "#f8fafc"
+      : "#0f172a"};
   color: ${({ theme }) => (theme.name === "light" ? "#0b1220" : "#e5e7eb")};
 
   .grid-lines {
@@ -35,18 +35,18 @@ const StyledHero = styled.header`
     background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
       linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
     background-size: 120px 120px;
-    opacity: 0.35;
-    mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 70%);
+    opacity: 0.15;
+    mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 70%);
     z-index: 0;
     pointer-events: none;
   }
 
   .floating-orb {
     position: absolute;
-    width: 320px;
-    height: 320px;
-    background: radial-gradient(circle, rgba(37, 99, 235, 0.28) 0%, rgba(37, 99, 235, 0) 65%);
-    filter: blur(30px);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, rgba(37, 99, 235, 0) 65%);
+    filter: blur(20px);
     z-index: 0;
   }
 
@@ -58,7 +58,7 @@ const StyledHero = styled.header`
   .orb-right {
     bottom: -10%;
     right: -4%;
-    background: radial-gradient(circle, rgba(16, 185, 129, 0.28) 0%, rgba(16, 185, 129, 0) 65%);
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0) 65%);
   }
 
   .hero-content {
@@ -71,8 +71,8 @@ const MediaCard = styled.div`
   position: relative;
   overflow: hidden;
   animation: ${float} 6s ease-in-out infinite;
-  box-shadow: 0 20px 90px rgba(0, 0, 0, 0.45);
-  border-radius: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 0.75rem;
 `;
 
 const VideoFrame = styled.div`

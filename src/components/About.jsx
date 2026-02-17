@@ -20,7 +20,7 @@ const StyledAbout = styled.section`
   .avatar {
     width: 15rem;
     height: 15rem;
-    box-shadow: 0 18px 80px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
   p {
@@ -56,7 +56,6 @@ const About = ({ avatar_url, bio, moreInfo }) => {
             <Col lg={7}>
               <div className="glass-panel about-card">
                 <div className="chip mb-3">Quick snapshot</div>
-                {bio && <p className="mb-3">{bio}</p>}
                 {moreInfo && <p className="mb-0">{moreInfo}</p>}
               </div>
             </Col>

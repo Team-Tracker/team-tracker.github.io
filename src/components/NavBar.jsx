@@ -32,7 +32,8 @@ const navLinks = {
 // #region styled-components
 const StyledDiv = styled.div`
   .navbar {
-    border-bottom: var(--border);
+    border-bottom: 1px solid ${({ theme }) =>
+      theme.name === "light" ? "rgba(15, 23, 42, 0.08)" : "rgba(255, 255, 255, 0.08)"};
   }
 
   .spacer {
@@ -42,8 +43,8 @@ const StyledDiv = styled.div`
   .logo-img {
     width: 42px;
     height: 42px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
   }
 `;
 // #endregion
