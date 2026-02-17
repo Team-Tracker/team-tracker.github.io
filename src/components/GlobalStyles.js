@@ -15,6 +15,13 @@ CSS Custom Properties
   --nav-height: 55px;
   --min-footer-height: 11vh;
   --card-height: 29rem;
+
+  /* Responsive layout tokens */
+  --page-padding-x: 1rem;
+  --section-radius: 32px;
+  --section-inset: 4%;
+  --section-inset-inner: 6%;
+  --glass-padding: 2rem;
   
   /* Typography */
   --font-family-primary: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
@@ -56,6 +63,11 @@ html {
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-size-adjust: 100%;
+}
+
+body,
+#root {
+  min-height: 100dvh;
 }
 
 body {
@@ -153,6 +165,11 @@ a:focus {
   cursor: pointer;
 }
 
+/*
+  Focus handling:
+  - Avoid the "white border" flash on mouse click/hover (focus)
+  - Keep an explicit focus ring for keyboard users via :focus-visible
+*/
 button:focus,
 input:focus,
 textarea:focus,
@@ -395,6 +412,39 @@ Responsive Design
   
   .form-group {
     max-width: 750px;
+  }
+}
+
+@media screen and (max-width: 575.98px) {
+  :root {
+    --page-padding-x: 0.875rem;
+    --section-radius: 22px;
+    --section-inset: 3.25%;
+    --section-inset-inner: 4.5%;
+    --glass-padding: 1.25rem;
+  }
+
+  .section {
+    padding: calc(var(--nav-height) + 1.25rem) 0;
+    min-height: auto;
+  }
+
+  .link-icons {
+    font-size: 2.25rem;
+    margin: 0 var(--spacing-md);
+  }
+
+  .btn {
+    padding-inline: 1.1rem;
+  }
+
+  /* Consistent full-width buttons in stacked (mobile) CTA groups */
+  .d-flex.flex-column > .btn,
+  .d-flex.flex-column > a,
+  .d-flex.flex-column > a > .btn,
+  .d-flex.flex-column > .d-inline-block,
+  .d-flex.flex-column > .d-inline-block > .btn {
+    width: 100%;
   }
 }
 

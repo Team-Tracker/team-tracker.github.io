@@ -65,6 +65,26 @@ const StyledHero = styled.header`
     position: relative;
     z-index: 1;
   }
+
+  @media (max-width: 575.98px) {
+    padding: calc(var(--nav-height) + 1.25rem) 0 2rem;
+
+    .floating-orb {
+      width: 220px;
+      height: 220px;
+      filter: blur(26px);
+    }
+
+    .orb-left {
+      top: 6%;
+      left: -18%;
+    }
+
+    .orb-right {
+      bottom: -14%;
+      right: -18%;
+    }
+  }
 `;
 
 const MediaCard = styled.div`
@@ -102,6 +122,7 @@ const propTypes = {
 const Hero = ({ name }) => {
   const theme = useSelector(selectMode);
   const secondaryVariant = theme === "light" ? "outline-dark" : "outline-light";
+  const htlProjectUrl = "https://www.htl-hl.ac.at/web/it/projekte/team-trackr/";
 
   return (
     <StyledHero>
@@ -124,11 +145,22 @@ const Hero = ({ name }) => {
             </p>
             <div className="d-flex flex-column flex-sm-row gap-3 gap-sm-4 mb-4 justify-content-center justify-content-lg-start">
               <ScrollLink to={"Projects"} smooth offset={-60} className="d-inline-block">
-                <Button size="lg" variant="primary">View projects</Button>
+                <Button size="lg" variant="primary" className="w-100">View projects</Button>
               </ScrollLink>
               <ScrollLink to={"Contact"} smooth offset={-60} className="d-inline-block">
-                <Button size="lg" variant={secondaryVariant}>Get in touch</Button>
+                <Button size="lg" variant={secondaryVariant} className="w-100">Get in touch</Button>
               </ScrollLink>
+              <a
+                href={htlProjectUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="d-inline-block"
+                aria-label="Open the HTL project page for Team-Trackr (opens in a new tab)"
+              >
+                <Button size="lg" variant={secondaryVariant} className="w-100">
+                  Project page <Icon icon="mdi:open-in-new" />
+                </Button>
+              </a>
             </div>
             <div className="d-flex align-items-center justify-content-center justify-content-lg-start">
               <SocialLinks />
@@ -141,7 +173,7 @@ const Hero = ({ name }) => {
                 <div className="chip">
                   <Icon icon="mdi:play" /> Featured Video
                 </div>
-                <small className="text-uppercase fw-semibold">Showreel · 2026</small>
+                <small className="text-uppercase fw-semibold">Showcase · 2025</small>
               </div>
               <VideoFrame>
                 <iframe
