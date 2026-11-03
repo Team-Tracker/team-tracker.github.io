@@ -12,48 +12,55 @@ import { Card } from "react-bootstrap";
 
 // #region styled-components
 const StyledCard = styled.div`
+  height: 100%;
+
   .card {
     height: var(--card-height);
-    border: 1px solid var(--card-border);
-    transition: var(--transition);
-    background: var(--surface-glass);
-    box-shadow: var(--card-shadow);
-    backdrop-filter: blur(4px);
-    color: inherit;
 
     .card-img-top {
-      height: 50%;
+      height: 45%;
+      padding: 1.75rem;
       object-fit: contain;
+      background: var(--surface-contrast);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .card-title {
+      font-family: var(--font-family-display);
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .card-text {
+      color: var(--text-muted);
+      font-size: 0.95rem;
     }
 
     .card-link {
-      text-decoration: none;
-      font-size: 1.5rem;
-      color: inherit;
-      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 600;
+      color: var(--bs-primary);
 
       &:hover {
-        color: var(--bs-primary);
-        opacity: 0.85;
+        opacity: 0.8;
       }
     }
 
     .card-footer {
       border-top: 1px solid var(--card-border);
       background: transparent;
-      backdrop-filter: blur(2px);
 
       .card-link {
-        color: inherit;
+        color: var(--fg);
       }
     }
 
     &:hover {
-      transform: translateY(-1px);
-      box-shadow: ${({ theme }) =>
-        theme.name === "light"
-          ? "0 4px 12px rgba(15, 23, 42, 0.12)"
-          : "0 6px 16px rgba(0, 0, 0, 0.30)"};
+      transform: translateY(-4px);
+      border-color: var(--chip-border);
+      box-shadow: var(--card-shadow-hover);
     }
   }
 
@@ -65,12 +72,6 @@ const StyledCard = styled.div`
 
     .card .card-img-top {
       height: 12rem;
-      padding: 0.75rem;
-      object-fit: contain;
-    }
-
-    .card .card-link {
-      font-size: 1.15rem;
     }
   }
 `;
@@ -98,7 +99,7 @@ const ProjectCard = ({ demo, description, image, name, url }) => {
         <Card.Body className="overflow-auto text-center">
           <Card.Title>{name}</Card.Title>
           <Card.Text>{description}</Card.Text>
-          {demo !== (undefined && null && "") ? (
+          {demo ? (
             <Card.Link href={demo}>
               {"Live Demo "}
               <Icon icon="icon-park-outline:code-computer" />

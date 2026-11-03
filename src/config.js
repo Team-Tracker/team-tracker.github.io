@@ -13,6 +13,16 @@ import Logo from "./images/logo.svg";
 
 export const githubUsername = "Team-Tracker";
 
+/* New Team-Tracker
+ **************************************************************
+  The actively developed version of Team-Tracker. Linked from the banner, hero, CTA section and footer.
+*/
+export const newAppUrl = "https://teamtracker.geyser.at";
+export const newAppHost = "teamtracker.geyser.at";
+
+// HTL project page
+export const htlProjectUrl = "https://www.htl-hl.ac.at/web/it/projekte/team-trackr/";
+
 // Navbar Logo image
 export const navLogo = null;
 
@@ -40,17 +50,17 @@ export const moreInfo =
 export const technologieData = [
   {
     id: 1,
-    technology: <Icon icon="logos:spring" className="display-4" />,
+    technology: <Icon icon="logos:spring-icon" className="display-4" />,
     name: "Spring Boot",
   },
   {
     id: 2,
-    technology: <Icon icon="logos:kotlin" className="display-4" />,
+    technology: <Icon icon="logos:kotlin-icon" className="display-4" />,
     name: "Kotlin",
   },
   {
     id: 3,
-    technology: <Icon icon="logos:mysql" className="display-4" />,
+    technology: <Icon icon="logos:mysql-icon" className="display-4" />,
     name: "MySQL",
   },
   {
@@ -75,12 +85,12 @@ export const technologieData = [
   },
   {
     id: 8,
-    technology: <Icon icon="logos:websocket" className="display-4" />,
+    technology: <Icon icon="ph:plugs-connected-bold" className="display-4" />,
     name: "WebSocket",
   },
   {
     id: 9,
-    technology: <Icon icon="logos:json" className="display-4" />,
+    technology: <Icon icon="vscode-icons:file-type-json" className="display-4" />,
     name: "JSON",
   },
   {
@@ -90,7 +100,7 @@ export const technologieData = [
   },
   {
     id: 11,
-    technology: <Icon icon="logos:git" className="display-4" />,
+    technology: <Icon icon="logos:git-icon" className="display-4" />,
     name: "Git",
   },
   {
@@ -123,6 +133,3 @@ export const projectCardImages = [
   https://formspree.io/
 */
 export const formspreeUrl = "https://formspree.io/f/mgvwoqea";
-
-// Footer icons theme (light or dark)
-export const footerTheme = "dark";

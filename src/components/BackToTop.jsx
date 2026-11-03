@@ -17,7 +17,13 @@ const StyledDiv = styled.div`
   z-index: 2;
 
   .link-icons {
-    color: ${({ theme }) => (theme.name === "light" ? "#45413C" : "#F5F2E8")};
+    font-size: 2.5rem;
+    opacity: 1;
+    color: var(--bs-primary);
+    background: var(--surface);
+    border-radius: 50%;
+    padding: 0;
+    box-shadow: var(--card-shadow-hover);
   }
 
   &.show-up {

@@ -28,7 +28,7 @@ import { Container } from "react-bootstrap";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 // Config
-import { footerTheme, navLogo } from "./config";
+import { navLogo } from "./config";
 // Util
 import { getStoredTheme, getPreferredTheme, setTheme } from "./utils";
 
@@ -150,7 +150,7 @@ const App = ({ projectCardImages = [], filteredProjects = [] }) => {
           <Route path="/All-Projects" element={<AllProjects />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Footer mode={footerTheme} />
+        <Footer />
       </>
     );
   } else if (isError) {

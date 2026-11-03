@@ -4,7 +4,7 @@ import styled, { keyframes } from "styled-components";
 // Components
 import { Container } from "react-bootstrap";
 // Images
-import Logo from "../images/logo.svg";
+import Logo from "../images/defaultNavLogo.svg";
 // Utils
 import { updateTitle } from "../utils";
 
@@ -26,7 +26,14 @@ const StyledNotFound = styled.main`
   min-height: calc(100vh - 2 * var(--nav-height) - 1rem);
 
   span {
-    font-size: 5rem;
+    font-family: var(--font-family-display);
+    font-weight: 700;
+    font-size: 6rem;
+    line-height: 1;
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   p {
@@ -34,7 +41,8 @@ const StyledNotFound = styled.main`
   }
 
   .logo-img {
-    width: 10rem;
+    width: 6rem;
+    margin: 0 1rem;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -56,7 +64,7 @@ const NotFound = () => {
       <StyledNotFound>
         <Container className="d-flex justify-content-center">
           <span>4</span>
-          <img src={Logo} alt="React Logo" className="logo-img" />
+          <img src={Logo} alt="Team-Tracker logo" className="logo-img" />
           <span>4</span>
         </Container>
         <p className="text-center">Sorry, page not found...</p>

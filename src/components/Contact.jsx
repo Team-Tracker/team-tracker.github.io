@@ -9,7 +9,7 @@ import ContactForm from "./ContactForm";
 
 // #region styled-components
 const StyledSection = styled.section`
-  min-height: calc(100vh - var(--nav-height) - 2rem);
+  padding: calc(var(--nav-height) + 1.5rem) 0 2rem;
 `;
 // #endregion
 
@@ -19,7 +19,7 @@ const Contact = () => {
     <Element name={"Contact"} id="contact">
       <StyledSection className="d-flex flex-column justify-content-center">
         <Container className="d-flex justify-content-center">
-          <Title size={"h2"} text={"Contact"} />
+          <Title size={"h2"} eyebrow={"Get in touch"} text={"Contact"} />
         </Container>
         <Container className="mt-4">
           <div className="glass-panel">

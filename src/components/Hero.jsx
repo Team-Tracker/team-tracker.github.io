@@ -1,6 +1,6 @@
 import React from "react";
 // Styles
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 // State
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
@@ -11,54 +11,37 @@ import { Icon } from "@iconify/react";
 import { Link as ScrollLink } from "react-scroll";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import SocialLinks from "./SocialLinks";
+// Config
+import { newAppUrl, newAppHost, htlProjectUrl } from "../config";
 
 // #region styled-components
-const float = keyframes`
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-  100% { transform: translateY(0px); }
-`;
-
 const StyledHero = styled.header`
   position: relative;
   overflow: hidden;
-  padding: calc(var(--nav-height) + 2rem) 0 3rem;
-  background: ${({ theme }) =>
-    theme.name === "light"
-      ? "#f8fafc"
-      : "#0f172a"};
-  color: ${({ theme }) => (theme.name === "light" ? "#0b1220" : "#e5e7eb")};
+  padding: 4.5rem 0 4rem;
 
-  .grid-lines {
+  .glow {
     position: absolute;
-    inset: 0;
-    background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-    background-size: 120px 120px;
-    opacity: 0.15;
-    mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 70%);
-    z-index: 0;
+    border-radius: 50%;
+    filter: blur(80px);
     pointer-events: none;
-  }
-
-  .floating-orb {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, rgba(37, 99, 235, 0) 65%);
-    filter: blur(20px);
     z-index: 0;
   }
 
-  .orb-left {
-    top: 10%;
-    left: -6%;
+  .glow-blue {
+    width: 520px;
+    height: 520px;
+    top: -220px;
+    left: -140px;
+    background: rgba(37, 99, 235, ${({ theme }) => (theme.name === "light" ? 0.18 : 0.32)});
   }
 
-  .orb-right {
-    bottom: -10%;
-    right: -4%;
-    background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0) 65%);
+  .glow-green {
+    width: 460px;
+    height: 460px;
+    bottom: -240px;
+    right: -120px;
+    background: rgba(16, 185, 129, ${({ theme }) => (theme.name === "light" ? 0.16 : 0.24)});
   }
 
   .hero-content {
@@ -66,43 +49,92 @@ const StyledHero = styled.header`
     z-index: 1;
   }
 
+  .hero-title {
+    font-size: clamp(2.75rem, 6vw, 4.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+  }
+
+  .lead {
+    font-size: 1.15rem;
+    max-width: 34rem;
+  }
+
+  .moved-note {
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+    max-width: 34rem;
+    padding: 1rem 1.15rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--chip-border);
+    background: var(--chip-bg);
+    text-align: left;
+
+    .note-icon {
+      flex-shrink: 0;
+      font-size: 1.35rem;
+      color: var(--bs-primary);
+      margin-top: 0.1rem;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    a {
+      font-weight: 700;
+      color: var(--bs-primary);
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  @media (max-width: 991.98px) {
+    .lead,
+    .moved-note {
+      margin-inline: auto;
+    }
+  }
+
   @media (max-width: 575.98px) {
-    padding: calc(var(--nav-height) + 1.25rem) 0 2rem;
-
-    .floating-orb {
-      width: 220px;
-      height: 220px;
-      filter: blur(26px);
-    }
-
-    .orb-left {
-      top: 6%;
-      left: -18%;
-    }
-
-    .orb-right {
-      bottom: -14%;
-      right: -18%;
-    }
+    padding: 2.5rem 0 2.5rem;
   }
 `;
 
 const MediaCard = styled.div`
   position: relative;
-  overflow: hidden;
-  animation: ${float} 6s ease-in-out infinite;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border-radius: 0.75rem;
+  padding: 0.75rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--brand-gradient);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .media-meta {
+    padding: 0.5rem 0.5rem 0.25rem;
+  }
 `;
 
 const VideoFrame = styled.div`
   position: relative;
   width: 100%;
   padding-top: 56.25%;
-  border-radius: 18px;
+  border-radius: var(--radius-md);
   overflow: hidden;
-  background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--surface-contrast);
 
   iframe {
     position: absolute;
@@ -122,84 +154,86 @@ const propTypes = {
 const Hero = ({ name }) => {
   const theme = useSelector(selectMode);
   const secondaryVariant = theme === "light" ? "outline-dark" : "outline-light";
-  const htlProjectUrl = "https://www.htl-hl.ac.at/web/it/projekte/team-trackr/";
 
   return (
     <StyledHero>
-      <span className="grid-lines" aria-hidden="true" />
-      <span className="floating-orb orb-left" aria-hidden="true" />
-      <span className="floating-orb orb-right" aria-hidden="true" />
+      <span className="grid-overlay" aria-hidden="true" />
+      <span className="glow glow-blue" aria-hidden="true" />
+      <span className="glow glow-green" aria-hidden="true" />
 
       <Container className="hero-content">
         <Row className="align-items-center gy-5">
-          <Col lg={6} className="text-center text-lg-start">
-            <div className="chip mb-3">
-              <Icon icon="mdi:flash" /> Team status at a glance
-            </div>
-            <h1 className="display-4 fw-bold title mb-3">
-              {name === null ? "null" : name}
+          <Col lg={6} className="text-center text-lg-start fade-in">
+            <a
+              href={newAppUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="chip mb-4"
+            >
+              <Icon icon="ph:sparkle-fill" /> The new Team-Tracker is live
+              <Icon icon="mdi:arrow-right" />
+            </a>
+            <h1 className="hero-title mb-4">
+              <span className="text-gradient">{name ?? "Team-Tracker"}</span>
+              <br />
+              your team, in sync.
             </h1>
             <p className="lead mb-4">
-              One hub for live status, assignments, and alerts across web, desktop, and mobile. Keep everyone aligned,
-              respond faster, and ship with confidence.
+              One hub for live status, assignments and alerts across web, desktop and mobile. Keep everyone
+              aligned, respond faster and ship with confidence.
             </p>
-            <div className="d-flex flex-column flex-sm-row gap-3 gap-sm-4 mb-4 justify-content-center justify-content-lg-start">
-              <ScrollLink to={"Projects"} smooth offset={-60} className="d-inline-block">
-                <Button size="lg" variant="primary" className="w-100">View projects</Button>
+            <div className="d-flex flex-column flex-sm-row gap-3 mb-4 justify-content-center justify-content-lg-start">
+              <a href={newAppUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
+                Open the new Team-Tracker <Icon icon="mdi:arrow-top-right" />
+              </a>
+              <ScrollLink to={"Projects"} smooth offset={-80} className="d-inline-block">
+                <Button size="lg" variant={secondaryVariant} className="w-100">
+                  Explore projects
+                </Button>
               </ScrollLink>
-              <ScrollLink to={"Contact"} smooth offset={-60} className="d-inline-block">
-                <Button size="lg" variant={secondaryVariant} className="w-100">Get in touch</Button>
-              </ScrollLink>
+            </div>
+            <div className="moved-note mb-4">
+              <Icon icon="ph:info-bold" className="note-icon" />
+              <p>
+                This page showcases the original HTL project. Development continues on the new Team-Tracker at{" "}
+                <a href={newAppUrl} target="_blank" rel="noopener noreferrer">
+                  {newAppHost}
+                </a>
+                .
+              </p>
+            </div>
+            <div className="d-flex align-items-center gap-2 justify-content-center justify-content-lg-start flex-wrap">
+              <SocialLinks />
               <a
                 href={htlProjectUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="d-inline-block"
+                className="small fw-semibold ms-1"
                 aria-label="Open the HTL project page for Team-Trackr (opens in a new tab)"
               >
-                <Button size="lg" variant={secondaryVariant} className="w-100">
-                  Project page <Icon icon="mdi:open-in-new" />
-                </Button>
+                HTL project page <Icon icon="mdi:open-in-new" />
               </a>
-            </div>
-            <div className="d-flex align-items-center justify-content-center justify-content-lg-start">
-              <SocialLinks />
             </div>
           </Col>
 
-          <Col lg={6}>
+          <Col lg={6} className="fade-in" style={{ animationDelay: "0.15s" }}>
             <MediaCard className="glass-panel">
-              <div className="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-3">
-                <div className="chip">
-                  <Icon icon="mdi:play" /> Featured Video
-                </div>
-                <small className="text-uppercase fw-semibold">Showcase · 2025</small>
-              </div>
               <VideoFrame>
                 <iframe
-                  title="Featured video"
+                  title="Team-Tracker showcase video"
                   src="https://www.youtube.com/embed/O0ty3WvZ60c"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                   loading="lazy"
                 />
               </VideoFrame>
-              <div
-                className="d-flex align-items-center gap-2 mt-3"
-                style={{ color: "var(--text-muted)" }}
-              >
-                <Icon icon="mdi:arrow-down" />
-                <span>Keep scrolling for projects &amp; tech stack</span>
+              <div className="media-meta d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <span className="chip">
+                  <Icon icon="mdi:play" /> Showcase
+                </span>
+                <small className="fw-semibold">HTL Hollabrunn · 2025</small>
               </div>
             </MediaCard>
-          </Col>
-        </Row>
-
-        <Row className="align-items-end mt-4">
-          <Col className="text-center">
-            <ScrollLink to={"About"} className="link-icons" smooth offset={-60}>
-              <Icon icon="fa6-solid:circle-chevron-down" />
-            </ScrollLink>
           </Col>
         </Row>
       </Container>

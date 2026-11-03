@@ -10,8 +10,13 @@ import { Blog } from "../config";
 
 // #region styled-components
 const StyledSocialLinks = styled.div`
-  a {
-    margin: 0 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  .link-icons {
+    margin: 0;
+    font-size: 1.5rem;
   }
 `;
 // #endregion

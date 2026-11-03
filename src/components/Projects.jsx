@@ -92,11 +92,9 @@ const Projects = () => {
       <section className="section">
         <Container>
           <Container className="d-flex justify-content-center">
-            <Title size={"h2"} text={"Projects"} />
+            <Title size={"h2"} eyebrow={"Open source"} text={"Projects"} />
           </Container>
-          <div className="glass-panel mt-4">
-            {content}
-          </div>
+          <div className="mt-5">{content}</div>
         </Container>
       </section>
     </Element>

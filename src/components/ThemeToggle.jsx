@@ -9,32 +9,23 @@ import PropTypes from "prop-types";
 import { Icon } from "@iconify/react";
 
 // #region styled-components
-const StyledSwitch = styled.label`
-  /* Slider pill */
-  display: flex;
-  width: 3.2rem;
-  font-size: 1.5rem;
-  border-radius: 30px;
+const StyledButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--card-border);
+  background: var(--surface);
+  color: var(--fg);
+  font-size: 1.15rem;
   transition: var(--transition);
-  border: 2px solid;
 
-  /* Hide defualt checkbox */
-  input[type="checkbox"] {
-    height: 0;
-    width: 0;
-    opacity: 0;
-  }
-
-  /* Move span when checked */
-  input[type="checkbox"]:checked + div {
-    transform: translateX(100%);
-  }
-
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: var(--transition);
+  &:hover {
+    border-color: var(--bs-primary);
+    color: var(--bs-primary);
+    transform: rotate(-12deg);
   }
 `;
 // #endregion
@@ -57,29 +48,23 @@ const ThemeToggle = ({ closeDelay = 250, setExpanded, setTheme }) => {
     const themType = theme === "light" ? "dark" : "light";
     setTheme(themType);
     setStoredTheme(themType);
+    setTimeout(() => {
+      setExpanded(false);
+    }, closeDelay);
   };
 
   return (
-    <StyledSwitch
-      onClick={() => {
-        setTimeout(() => {
-          setExpanded(false);
-        }, closeDelay);
-      }}
+    <StyledButton
+      type="button"
+      aria-label={`Toggle theme, currently ${theme}.`}
+      onClick={toggleTheme}
     >
-      <input
-        type="checkbox"
-        aria-label={`Toggle theme, currently ${theme}.`}
-        onClick={() => toggleTheme()}
-      />
-      <div>
-        {theme === "light" ? (
-          <Icon icon="game-icons:sunflower" />
-        ) : (
-          <Icon icon="game-icons:moon" />
-        )}
-      </div>
-    </StyledSwitch>
+      {theme === "light" ? (
+        <Icon icon="ph:sun-bold" />
+      ) : (
+        <Icon icon="ph:moon-stars-bold" />
+      )}
+    </StyledButton>
   );
 };
 

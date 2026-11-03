@@ -7,6 +7,7 @@ import About from "../components/About";
 import Skills from "../components/Technologies";
 import Projects from "../components/Projects";
 import Contact from "../components/Contact";
+import NewVersionCta from "../components/NewVersionCta";
 import BackToTop from "../components/BackToTop";
 // Config
 import { filteredProjects, moreInfo } from "../config";
@@ -18,7 +19,7 @@ const Home = () => {
   const { data: userData } = useGetUsersQuery();
 
   React.useEffect(() => {
-    updateTitle(`${userData.name} | Portfolio`);
+    updateTitle(`${userData.name ?? "Team-Tracker"} | Real-time team management`);
   }, [userData]);
 
   return (
@@ -32,6 +33,7 @@ const Home = () => {
         />
         <Skills />
         <Projects filteredProjects={filteredProjects} />
+        <NewVersionCta />
         <Contact />
       </main>
       <BackToTop />

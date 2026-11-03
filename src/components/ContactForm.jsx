@@ -1,9 +1,6 @@
 import React from "react";
 // Styles
 import styled from "styled-components";
-// State
-import { useSelector } from "react-redux";
-import { selectMode } from "../app/appSlice";
 // Components
 import { Alert, Button, Form, Spinner } from "react-bootstrap";
 // Config
@@ -13,11 +10,12 @@ import { postData } from "../utils";
 
 // #region styled-components
 const StyledForm = styled.div`
-  .form-control {
-    background: ${({ theme }) =>
-      theme.name === "light"
-        ? "rgba(var(--bs-body-color-rgb), 0.03)"
-        : "var(--bs-gray-dark)"};
+  .form-label {
+    font-weight: 600;
+  }
+
+  textarea.form-control {
+    min-height: 9rem;
   }
 `;
 // #endregion
@@ -29,7 +27,6 @@ const ContactForm = () => {
   const [success, setSuccess] = React.useState(false);
   const [danger, setDanger] = React.useState(false);
   const [dangerMessage, setDangerMessage] = React.useState(null);
-  const theme = useSelector(selectMode);
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
@@ -102,14 +99,14 @@ const ContactForm = () => {
           {formspreeUrl && (
             <Button
               size="lg"
-              variant={theme === "light" ? "outline-dark" : "outline-light"}
+              variant="primary"
               type="submit"
               disabled={isProcessing}
               className="my-4"
             >
               Submit{" "}
               {isProcessing && (
-                <Spinner animation="border" variant="success" size="sm" />
+                <Spinner animation="border" variant="light" size="sm" />
               )}
             </Button>
           )}

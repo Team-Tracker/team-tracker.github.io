@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { selectProjects } from "../app/projectsSlice";
 import { useGetUsersQuery, useGetProjectsQuery } from "../app/apiSlice";
 // Icons
-import { Icon } from "@iconify/react/dist/iconify.js";
+import { Icon } from "@iconify/react";
 // Components
 import {
   Col,
@@ -25,6 +25,8 @@ import { updateTitle } from "../utils";
 
 // #region styled-components
 const StyledSection = styled.section`
+  padding: 3rem 0 2rem;
+
   .input-group {
     max-width: 90vw;
   }
@@ -113,7 +115,7 @@ const AllProjects = () => {
     content = (
       <>
         <Container className="d-flex justify-content-center">
-          <Title size={"h2"} text={"All Projects"} />
+          <Title size={"h2"} eyebrow={"GitHub"} text={"All Projects"} />
         </Container>
         <Container className="d-flex flex-column justify-content-center">
           <Loading />
@@ -124,10 +126,10 @@ const AllProjects = () => {
     content = (
       <>
         <Container className="d-flex justify-content-center">
-          <Title size={"h2"} text={"All Projects"} />
+          <Title size={"h2"} eyebrow={"GitHub"} text={"All Projects"} />
         </Container>
         <Container>
-          <InputGroup className="mx-auto mb-3">
+          <InputGroup className="mx-auto my-4">
             <InputGroup.Text id="search">
               <Icon icon="ic:round-search" />
             </InputGroup.Text>
